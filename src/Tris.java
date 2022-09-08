@@ -209,15 +209,205 @@ public class Tris implements ActionListener {
     }
 
     private void botMove() {
-        int botChoice;
-        do {
-            botChoice = rand.nextInt(9);
-        } while (buttons[botChoice].getText() != "");
+        int botChoice,c=0;
+        int i,x=0;
 
-        buttons[botChoice].setText("O");
-        buttons[botChoice].setForeground(Color.BLUE);
-        playerTurn = true;
-        textLabel.setText("Turno X");
-        check();
+        for(int j=3;j<=9;j+=3) {
+            c=0;
+            for (i = x; i < j; i++) {
+                if (buttons[i].getText() == "O") {
+                    c++;
+                }
+            }
+            if (c == 2) {
+                for (i = x; i < j; i++) {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setText("O");
+                        buttons[i].setForeground(Color.BLUE);
+                        playerTurn = true;
+                        textLabel.setText("Turno X");
+                        check();
+                        return;
+                    }
+                }
+            }
+            x+=3;
+        }
+        x = 6;
+        int y = 0;
+        for(int j=0;j<3;j++) {
+            c=0;
+            for (i = y; i <= x; i += 3) {
+                if (buttons[i].getText() == "O") {
+                    c++;
+                }
+            }
+            if (c == 2) {
+                for (i = y; i <= x; i += 3) {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setText("O");
+                        buttons[i].setForeground(Color.BLUE);
+                        playerTurn = true;
+                        textLabel.setText("Turno X");
+                        check();
+                        return;
+                    }
+                }
+            }
+            y++;
+            x++;
+        }
+
+        if(!(c>=2)){
+            if(buttons[0].getText() == "O"&& buttons[4].getText() == "O"){
+                buttons[8].setText("O");
+                buttons[8].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[4].getText() == "O"&& buttons[8].getText() == "O"){
+                buttons[0].setText("O");
+                buttons[0].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[0].getText() == "O"&& buttons[8].getText() == "O"){
+                buttons[4].setText("O");
+                buttons[4].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[2].getText() == "O"&& buttons[4].getText() == "O"){
+                buttons[6].setText("O");
+                buttons[6].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[4].getText() == "O"&& buttons[6].getText() == "O"){
+                buttons[2].setText("O");
+                buttons[2].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[2].getText() == "O"&& buttons[6].getText() == "O"){
+                buttons[4].setText("O");
+                buttons[4].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }
+        }
+
+        i=0;
+        x=0;
+        for(int j=3;j<=9;j+=3) {
+            c=0;
+            for (i = x; i < j; i++) {
+                if (buttons[i].getText() == "X") {
+                    c++;
+                }
+            }
+            if (c == 2) {
+                for (i = x; i < j; i++) {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setText("O");
+                        buttons[i].setForeground(Color.BLUE);
+                        playerTurn = true;
+                        textLabel.setText("Turno X");
+                        check();
+                        return;
+                    }
+                }
+            }
+            x+=3;
+        }
+        x = 6;
+        y = 0;
+        for(int j=0;j<3;j++) {
+            c=0;
+            for (i = y; i <= x; i += 3) {
+                if (buttons[i].getText() == "X") {
+                    c++;
+                }
+            }
+            if (c == 2) {
+                for (i = y; i <= x; i += 3) {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setText("O");
+                        buttons[i].setForeground(Color.BLUE);
+                        playerTurn = true;
+                        textLabel.setText("Turno X");
+                        check();
+                        return;
+                    }
+                }
+            }
+            y++;
+            x++;
+        }
+
+        if(!(c>=2)){
+            if(buttons[0].getText() == "X"&& buttons[4].getText() == "X"){
+                buttons[8].setText("O");
+                buttons[8].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[4].getText() == "X"&& buttons[8].getText() == "X"){
+                buttons[0].setText("O");
+                buttons[0].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[0].getText() == "X"&& buttons[8].getText() == "X"){
+                buttons[4].setText("O");
+                buttons[4].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[2].getText() == "X"&& buttons[4].getText() == "X"){
+                buttons[6].setText("O");
+                buttons[6].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[4].getText() == "X"&& buttons[6].getText() == "X"){
+                buttons[2].setText("O");
+                buttons[2].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }else if(buttons[2].getText() == "X"&& buttons[6].getText() == "X"){
+                buttons[4].setText("O");
+                buttons[4].setForeground(Color.BLUE);
+                playerTurn = true;
+                textLabel.setText("Turno X");
+                check();
+                return;
+            }
+            c=-1;
+        }
+
+        if(c==-1){
+            do {
+                botChoice = rand.nextInt(9);
+            } while (buttons[botChoice].getText() != "");
+            buttons[botChoice].setText("O");
+            buttons[botChoice].setForeground(Color.BLUE);
+            playerTurn = true;
+            textLabel.setText("Turno X");
+            check();
+        }
     }
 }
