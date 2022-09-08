@@ -20,6 +20,8 @@ public class Tris implements ActionListener {
     JButton newGame;
 
     boolean playerTurn=true;
+
+    boolean fine=false;
     Tris(){
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Tris");
@@ -122,6 +124,7 @@ public class Tris implements ActionListener {
         else if(buttons[0].getText()=="O"&& buttons[4].getText()=="O"&& buttons[8].getText()=="O") oWins(0,4,8);
         else if(buttons[2].getText()=="O"&& buttons[4].getText()=="O"&& buttons[6].getText()=="O") oWins(2,4,6);
         else checkDraw();
+
     }
 
     public void checkDraw(){
@@ -143,6 +146,7 @@ public class Tris implements ActionListener {
         for(int i=0;i<9;i++){
             buttons[i].setEnabled(false);
         }
+        fine=true;
     }
     //oWins
     public void oWins(int a,int b,int c){
@@ -154,6 +158,7 @@ public class Tris implements ActionListener {
         for(int i=0;i<9;i++){
             buttons[i].setEnabled(false);
         }
+        fine=true;
     }
     //tie
     public void draw(){
@@ -161,6 +166,7 @@ public class Tris implements ActionListener {
             buttons[i].setEnabled(false);
             textLabel.setText("Pareggio");
         }
+        fine=true;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -186,7 +192,8 @@ public class Tris implements ActionListener {
                         b.setText("X");
                         b.setForeground(Color.red);
                         textLabel.setText("Turno O");
-                        if(botmode){
+                        check();
+                        if(botmode&&!fine){
                             botMove();
                         }
                     } else if(!botmode) {
@@ -202,7 +209,6 @@ public class Tris implements ActionListener {
     }
 
     private void botMove() {
-
         int botChoice;
         do {
             botChoice = rand.nextInt(9);
