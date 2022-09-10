@@ -138,6 +138,7 @@ public class Tris implements ActionListener {
     }
     //xWins
     public void xWins(int a,int b,int c){
+        fine=true;
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
         buttons[c].setBackground(Color.GREEN);
@@ -146,7 +147,6 @@ public class Tris implements ActionListener {
         for(int i=0;i<9;i++){
             buttons[i].setEnabled(false);
         }
-        fine=true;
     }
     //oWins
     public void oWins(int a,int b,int c){
@@ -158,7 +158,6 @@ public class Tris implements ActionListener {
         for(int i=0;i<9;i++){
             buttons[i].setEnabled(false);
         }
-        fine=true;
     }
     //tie
     public void draw(){
@@ -209,6 +208,8 @@ public class Tris implements ActionListener {
     }
 
     private void botMove() {
+        if(fine){return ; }
+
         int botChoice,c=0;
         int i,x=0;
 
@@ -304,7 +305,7 @@ public class Tris implements ActionListener {
             }
         }
 
-        i=0;
+
         x=0;
         for(int j=3;j<=9;j+=3) {
             c=0;
