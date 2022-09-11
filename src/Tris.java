@@ -54,8 +54,8 @@ public class Tris implements ActionListener {
         textPanel.setLayout(new BorderLayout());
 
 
-        buttonPanel.setLayout(new GridLayout(3, 3, 3, 3));
-        buttonPanel.setBackground(new Color(0x1F7FE1));
+        buttonPanel.setLayout(new GridLayout(3, 3, 4, 4));
+        buttonPanel.setBackground(new Color(0x123456));
 
 
         for (int i = 0; i < 9; i++) {
@@ -63,6 +63,7 @@ public class Tris implements ActionListener {
             buttons[i].setText("");
             buttons[i].setFont(new Font("JetBrains mono", Font.PLAIN, 75));
             buttons[i].setFocusable(false);
+            buttons[i].setBackground(Color.GRAY);
             buttonPanel.add(buttons[i]);
             buttons[i].addActionListener(this);
             buttons[i].setFocusable(false);
