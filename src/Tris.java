@@ -21,6 +21,8 @@ public class Tris implements ActionListener {
 
     boolean fine = false;
 
+    /** Creazione frame principale
+     */
     public Tris() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Tris");
@@ -54,10 +56,8 @@ public class Tris implements ActionListener {
         textPanel.setPreferredSize(new Dimension(800, 100));
         textPanel.setLayout(new BorderLayout());
 
-
         buttonPanel.setLayout(new GridLayout(3, 3, 4, 4));
         buttonPanel.setBackground(new Color(0x123456));
-
 
         for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton();
@@ -71,7 +71,6 @@ public class Tris implements ActionListener {
 
         }
 
-
         textPanel.add(textLabel, BorderLayout.CENTER);
         textPanel.add(changeMode, BorderLayout.WEST);
         textPanel.add(newGame, BorderLayout.EAST);
@@ -81,9 +80,15 @@ public class Tris implements ActionListener {
 
         firstTurn();
     }
-
     //firstTurn()
-    private void firstTurn() {
+     /** Nel primo turno genera un boolean
+     * casuale per vedere
+     * se deve iniziare il player, se
+     * questo cosa non si verifica controlla
+     * se la {@code @botmode} e fa partire
+     * la mossa del bot.
+     */
+     private void firstTurn() {
         try {
             Thread.sleep(300);
         } catch (InterruptedException e) {
@@ -103,9 +108,18 @@ public class Tris implements ActionListener {
     }
 
     //check()
+    /** Controlla se il player
+     *  o il bot/player2 ha vinto
+     *  e richiama la funzione in
+     *  base a quello, e se nessuno
+     *  ha vinto controlla se c'è
+     *  un pareggo e chiama il metodo
+     *  che lo controlli.
+     */
     private void check() {
         //combinazioni X
-        if (buttons[0].getText() == "X" && buttons[1].getText() == "X" && buttons[2].getText() == "X") xWins(0, 1, 2);
+        if (buttons[0].getText() == "X" && buttons[1].getText() == "X" && buttons[2].getText() == "X")
+            xWins(0, 1, 2);
         else if (buttons[3].getText() == "X" && buttons[4].getText() == "X" && buttons[5].getText() == "X")
             xWins(3, 4, 5);
         else if (buttons[6].getText() == "X" && buttons[7].getText() == "X" && buttons[8].getText() == "X")
@@ -143,6 +157,9 @@ public class Tris implements ActionListener {
 
     }
 
+    /**Controlla se tutti itasti sono occupati,
+     * e in quel caso chiamare il pareggo.
+     */
     private void checkDraw() {
         int x = 0;
         for (int i = 0; i < 9; i++) {
@@ -152,8 +169,11 @@ public class Tris implements ActionListener {
         }
         if (x == 9) draw();
     }
-
     //xWins
+    /** Se questo metodo viene chiamato significa che il player ha vinto.
+     * Richiede le tre posizioni che hanno portato alla vittoria, e
+     * cambia il Background di tali posizioni in verde.
+     */
     private void xWins(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
@@ -167,6 +187,13 @@ public class Tris implements ActionListener {
     }
 
     //oWins
+    /** Se questo metodo viene chiamato significa che il bot/player2 ha vinto.
+     * Richiede le tre posizioni che hanno portato alla vittoria, e
+     * cambia il BackGround di tali posizioni in verde.
+     * @param a prima posizione che ha portato alla vittoria
+     * @param b seconda posizione che ha portato alla vittoria
+     * @param c terza posizione che ha portato alla vittoria
+     */
     private void oWins(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
@@ -179,15 +206,28 @@ public class Tris implements ActionListener {
         fine = true;
     }
 
-    //tie
+    //draw
+    /** Se questo metodo viene chiamato significa che c'è stato un pareggio.
+     * Blocca tutti i tasti dato che la partita è finita
+     */
     private void draw() {
-        for (int i = 0; i < 9; i++) {
+        textLabel.setText("Pareggio");
+        for (int i = 0; i < 9; i++)
             buttons[i].setEnabled(false);
-            textLabel.setText("Pareggio");
-        }
+
         fine = true;
     }
 
+    /** Controlla che bottone è stato premuto,
+     * se è un tasto di gioco, imposta il testo di quel
+     * tasto in X/O in base di chi era il turno,
+     * e se il prossimo turno è del bot richiama la mossa del bot.
+
+     * Se è stato premuto il tasto nuova partita crea un nuovo frame.
+
+     * E se viene premuto il tasto per cambiare modalitò, cambia modalita è se
+     * la botmode è attivata ed è il turno del bot richiama la mossa del bot.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == changeMode) {
@@ -230,6 +270,13 @@ public class Tris implements ActionListener {
         }
     }
 
+    /**Se questo medoto viene chiamato significa
+     * che il bot ha possibilitò di vincere, o
+     * d'impedire la vittoria al player.
+
+     * Imposta O dove il bot deve giocare
+     * @param x posizione da occupare
+     */
     private void botcheck(int x){
         buttons[x].setText("O");
         buttons[x].setForeground(Color.BLUE);
@@ -238,6 +285,11 @@ public class Tris implements ActionListener {
         textLabel.setText("Turno X");
     }
 
+    /** Se il bot può vincere nelle diagonali chiama il metodo botcheck con la posizione da occupare,
+     * se il bot puo vincere nelle righe o nelle colonne vince,
+     * se il player puo vincere nelle righe o nelle colonne chiama il metodo botcheck con la posizione da occupare,
+     * Se il player può vincere nelle chiama il metodo botcheck con la posizione da occupare per bloccarlo.
+     */
     private void botMove() {
         //controlla se il bot puo vincere nelle diagonali
         if (buttons[0].getText() == "O" && buttons[4].getText() == "O" && buttons[8].getText() == "") {
