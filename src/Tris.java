@@ -230,49 +230,32 @@ public class Tris implements ActionListener {
         }
     }
 
+    private void botcheck(int x){
+        buttons[x].setText("O");
+        buttons[x].setForeground(Color.BLUE);
+        check();
+        playerTurn = true;
+        textLabel.setText("Turno X");
+    }
     private void botMove() {
         //controlla se il bot puo vincere nelle diagonali
         if (buttons[0].getText() == "O" && buttons[4].getText() == "O" && buttons[8].getText() == "") {
-            buttons[8].setText("O");
-            buttons[8].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(8);
             return;
         } else if (buttons[4].getText() == "O" && buttons[8].getText() == "O" && buttons[0].getText() == "") {
-            buttons[0].setText("O");
-            buttons[0].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(0);
             return;
         } else if (buttons[0].getText() == "O" && buttons[8].getText() == "O" && buttons[4].getText() == "") {
-            buttons[4].setText("O");
-            buttons[4].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(4);
             return;
         } else if (buttons[2].getText() == "O" && buttons[4].getText() == "O" && buttons[6].getText() == "") {
-            buttons[6].setText("O");
-            buttons[6].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(6);
             return;
         } else if (buttons[4].getText() == "O" && buttons[6].getText() == "O" && buttons[2].getText() == "") {
-            buttons[2].setText("O");
-            buttons[2].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(2);
             return;
         } else if (buttons[2].getText() == "O" && buttons[6].getText() == "O" && buttons[4].getText() == "") {
-            buttons[4].setText("O");
-            buttons[4].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(4);
             return;
         }
         //controlla se il bot puo vincere nelle righe
@@ -375,46 +358,22 @@ public class Tris implements ActionListener {
         //controlla se il player puo vincere nelle diagonali e bloccalo
 
         if (buttons[0].getText() == "X" && buttons[4].getText() == "X" && buttons[8].getText() == "") {
-            buttons[8].setText("O");
-            buttons[8].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(8);
             return;
         } else if (buttons[4].getText() == "X" && buttons[8].getText() == "X" && buttons[0].getText() == "") {
-            buttons[0].setText("O");
-            buttons[0].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(0);
             return;
         } else if (buttons[0].getText() == "X" && buttons[8].getText() == "X" && buttons[4].getText() == "") {
-            buttons[4].setText("O");
-            buttons[4].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(4);
             return;
         } else if (buttons[2].getText() == "X" && buttons[4].getText() == "X" && buttons[6].getText() == "") {
-            buttons[6].setText("O");
-            buttons[6].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(6);
             return;
         } else if (buttons[4].getText() == "X" && buttons[6].getText() == "X" && buttons[2].getText() == "") {
-            buttons[2].setText("O");
-            buttons[2].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(2);
             return;
         } else if (buttons[2].getText() == "X" && buttons[6].getText() == "X" && buttons[4].getText() == "") {
-            buttons[4].setText("O");
-            buttons[4].setForeground(Color.BLUE);
-            check();
-            playerTurn = true;
-            textLabel.setText("Turno X");
+            botcheck(4);
             return;
         }
         if(fine){return;}
