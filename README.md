@@ -4,4 +4,4 @@ Premere N per aprire velocemente un altra partita.
 Premere ESC per chiudere velocemente il gioco.
 Premere C per cambiare velocemente modalità di gioco.
 
-# (È da qalche mese che ho iniziato java, e sono sicuro che si potrebbe fare di meglio) 
+# (È da qualche mese che ho iniziato java, e sono sicuro che si potrebbe fare di meglio) 
