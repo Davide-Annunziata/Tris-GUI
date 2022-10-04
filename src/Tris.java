@@ -11,7 +11,7 @@ public class Tris implements ActionListener {
     JPanel buttonPanel = new JPanel();
     JLabel textLabel = new JLabel();
 
-    static JCheckBox changeMode;
+    JCheckBox changeMode;
 
     boolean botmode=true;
 
