@@ -21,6 +21,7 @@ public class Tris implements ActionListener {
 
     boolean fine = false;
 
+    Action newGameAction;
     /** Creazione frame principale
      */
     public Tris() {
@@ -70,6 +71,13 @@ public class Tris implements ActionListener {
             buttons[i].setFocusable(false);
 
         }
+        // se l'utente preme N crea una nuova partita
+        newGameAction= new newGame();
+        textLabel.getInputMap().put(KeyStroke.getKeyStroke("N"),"newGameAction");
+        textLabel.getActionMap().put("newGameAction",newGameAction);
+        // se l'utente preme ESC l'utente esce
+        textLabel.getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"),"escGameAction");
+        textLabel.getActionMap().put("escGameAction",new escGame());
 
         textPanel.add(textLabel, BorderLayout.CENTER);
         textPanel.add(changeMode, BorderLayout.WEST);
@@ -77,7 +85,6 @@ public class Tris implements ActionListener {
         frame.add(textPanel, BorderLayout.NORTH);
         frame.add(buttonPanel);
         frame.setVisible(true);
-
         firstTurn();
     }
     //firstTurn()
@@ -311,105 +318,62 @@ public class Tris implements ActionListener {
             botcheck(4);
             return;
         }
-        //controlla se il bot puo vincere nelle righe
-        int c,i, x = 0;
 
-        for (int j = 3; j <= 9; j += 3) {
-            c = 0;
-            for (i = x; i < j; i++) {
-                if (buttons[i].getText() == "O") {
-                    c++;
-                }
-            }
-            if (c == 2) {
+        int c,i,x;
+        String sign = "O";
+        for(int k=0;k<2;k++) {
+            x = 0;
+            //controlla se il bot puo vincere nelle righe
+            for (int j = 3; j <= 9; j += 3) {
+                c = 0;
                 for (i = x; i < j; i++) {
-                    if (buttons[i].getText() == "") {
-                        buttons[i].setText("O");
-                        buttons[i].setForeground(Color.BLUE);
-                        playerTurn = true;
-                        textLabel.setText("Turno X");
-                        check();
-                        return;
+                    if (buttons[i].getText().equals(sign)) {
+                        c++;
                     }
                 }
-            }
-            x += 3;
-        }
-        //controlla se il bot puo vincere nelle colonne
-        x = 6;
-        int y = 0;
-        for (int j = 0; j < 3; j++) {
-            c = 0;
-            for (i = y; i <= x; i += 3) {
-                if (buttons[i].getText() == "O") {
-                    c++;
+                if (c == 2) {
+                    for (i = x; i < j; i++) {
+                        if (buttons[i].getText() == "") {
+                            buttons[i].setText("O");
+                            buttons[i].setForeground(Color.BLUE);
+                            playerTurn = true;
+                            textLabel.setText("Turno X");
+                            check();
+                            return;
+                        }
+                    }
                 }
+                x += 3;
             }
-            if (c == 2) {
+            //controlla se il bot puo vincere nelle colonne
+            x = 6;
+            int y = 0;
+            for (int j = 0; j < 3; j++) {
+                c = 0;
                 for (i = y; i <= x; i += 3) {
-                    if (buttons[i].getText() == "") {
-                        buttons[i].setText("O");
-                        buttons[i].setForeground(Color.BLUE);
-                        playerTurn = true;
-                        textLabel.setText("Turno X");
-                        check();
-                        return;
+                    if (buttons[i].getText() == sign) {
+                        c++;
                     }
                 }
-            }
-            y++;
-            x++;
-        }
-        x = 0;
-        //controlla se il player puo vincere nelle righe e bloccalo
-        for (int j = 3; j <= 9; j += 3) {
-            c = 0;
-            for (i = x; i < j; i++) {
-                if (buttons[i].getText() == "X") {
-                    c++;
-                }
-            }
-            if (c == 2) {
-                for (i = x; i < j; i++) {
-                    if (buttons[i].getText() == "") {
-                        buttons[i].setText("O");
-                        buttons[i].setForeground(Color.BLUE);
-                        playerTurn = true;
-                        textLabel.setText("Turno X");
-                        check();
-                        return;
+                if (c == 2) {
+                    for (i = y; i <= x; i += 3) {
+                        if (buttons[i].getText() == "") {
+                            buttons[i].setText("O");
+                            buttons[i].setForeground(Color.BLUE);
+                            playerTurn = true;
+                            textLabel.setText("Turno X");
+                            check();
+                            return;
+                        }
                     }
                 }
+                y++;
+                x++;
             }
-            x += 3;
+            sign = "X";
         }
-        //controlla se il player puo vincere nelle colonne e bloccalo
-        x = 6;
-        y = 0;
-        for (int j = 0; j < 3; j++) {
-            c = 0;
-            for (i = y; i <= x; i += 3) {
-                if (buttons[i].getText() == "X") {
-                    c++;
-                }
-            }
-            if (c == 2) {
-                for (i = y; i <= x; i += 3) {
-                    if (buttons[i].getText() == "") {
-                        buttons[i].setText("O");
-                        buttons[i].setForeground(Color.BLUE);
-                        playerTurn = true;
-                        textLabel.setText("Turno X");
-                        check();
-                        return;
-                    }
-                }
-            }
-            y++;
-            x++;
-        }
+
         //controlla se il player puo vincere nelle diagonali e bloccalo
-
         if (buttons[0].getText() == "X" && buttons[4].getText() == "X" && buttons[8].getText() == "") {
             botcheck(8);
             return;
@@ -442,5 +406,20 @@ public class Tris implements ActionListener {
         textLabel.setText("Turno X");
         check();
 
+    }
+
+    public class newGame extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            frame.dispose();
+            new Tris();
+        }
+    }
+
+    private class escGame extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            frame.dispose();
+        }
     }
 }
