@@ -4,4 +4,6 @@ Premere N per aprire velocemente un altra partita.
 Premere ESC per chiudere velocemente il gioco.
 Premere C per cambiare velocemente modalità di gioco.
 
+
+Aprire file .jar in src per giocare.
 # (È da qualche mese che ho iniziato java, e sono sicuro che si potrebbe fare di meglio) 
