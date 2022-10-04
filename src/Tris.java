@@ -11,7 +11,7 @@ public class Tris implements ActionListener {
     JPanel buttonPanel = new JPanel();
     JLabel textLabel = new JLabel();
 
-    JCheckBox changeMode;
+    static JCheckBox changeMode;
 
     boolean botmode=true;
 
@@ -78,6 +78,9 @@ public class Tris implements ActionListener {
         // se l'utente preme ESC l'utente esce
         textLabel.getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"),"escGameAction");
         textLabel.getActionMap().put("escGameAction",new escGame());
+        // se l'utente preme C cambia modalità di gioco
+        textLabel.getInputMap().put(KeyStroke.getKeyStroke("C"),"changeModeAction");
+        textLabel.getActionMap().put("changeModeAction",new changeModeAction());
 
         textPanel.add(textLabel, BorderLayout.CENTER);
         textPanel.add(changeMode, BorderLayout.WEST);
@@ -420,6 +423,22 @@ public class Tris implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
+        }
+    }
+
+    private class changeModeAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (botmode) {
+                botmode = false;
+                changeMode.setSelected(false);
+            } else {
+                botmode = true;
+                changeMode.setSelected(true);
+                if (!playerTurn&&!fine) {
+                    botMove();
+                }
+            }
         }
     }
 }
