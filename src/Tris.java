@@ -13,7 +13,7 @@ public class Tris implements ActionListener {
 
     JCheckBox changeMode;
 
-    boolean botmode=true;
+    boolean botmode;
 
     JButton newGame;
 
@@ -24,7 +24,10 @@ public class Tris implements ActionListener {
     Action newGameAction;
     /** Creazione frame principale
      */
-    public Tris() {
+    public Tris(){
+        new Tris(0);
+    }
+    private Tris(int n) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Tris");
         frame.setSize(800, 800);
@@ -46,8 +49,15 @@ public class Tris implements ActionListener {
         textLabel.setFont(new Font("JetBrains mono", Font.PLAIN, 75));
         textLabel.setOpaque(true);
 
+
         changeMode = new JCheckBox("gioca contro bot");
-        changeMode.setSelected(true);
+        if(n==0){
+            botmode=false;
+            changeMode.setSelected(false);
+        }else if (n==1){
+            botmode=true;
+            changeMode.setSelected(true);
+        }
         changeMode.setFocusable(false);
         changeMode.setForeground(new Color(0x123456));
         changeMode.setBackground(Color.BLACK);
@@ -252,7 +262,7 @@ public class Tris implements ActionListener {
             return;
         } else if (e.getSource() == newGame) {
             this.frame.dispose();
-            new Tris();
+            new Tris(botmode? 1:0);
             return;
         }
 
@@ -415,7 +425,7 @@ public class Tris implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
-            new Tris();
+            new Tris(botmode? 1:0);
         }
     }
 
